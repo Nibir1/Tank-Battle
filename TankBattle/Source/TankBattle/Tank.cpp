@@ -22,7 +22,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	UE_LOG(LogTemp, Warning, TEXT("SetupPlayerInputComponent Called"));
 
-	InputComponent->BindAction("Turret_Clockwise", IE_Pressed, this, &ATank::RotateCW);
+	InputComponent->BindAxis();
 	InputComponent->BindAction("Turret_CounterClockwise", IE_Pressed, this, &ATank::RotateCCW);
 }
 
