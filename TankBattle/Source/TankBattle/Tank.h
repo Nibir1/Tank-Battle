@@ -17,7 +17,7 @@ protected:
 
 	virtual void BeginPlay() override;
 
-public:	
+public:
 
 	virtual void Tick(float DeltaTime) override;
 
@@ -29,8 +29,9 @@ public:
 
 private:
 
-	void RotateCW();
-	void RotateCCW();
-	
-	UChildActorComponent* Turret;
+	// Rotate turret at speed , -ve values for CCW
+	void RotateTurret(float Speed);
+
+	// A reference from blueprint
+	UChildActorComponent* Turret = nullptr;
 };

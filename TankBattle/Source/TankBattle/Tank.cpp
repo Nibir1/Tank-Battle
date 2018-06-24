@@ -1,7 +1,7 @@
 #include "Tank.h"
 
 ATank::ATank()
-{	
+{
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -20,27 +20,16 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	UE_LOG(LogTemp, Warning, TEXT("SetupPlayerInputComponent Called"));
-
-	InputComponent->BindAxis();
-	InputComponent->BindAction("Turret_CounterClockwise", IE_Pressed, this, &ATank::RotateCCW);
+	InputComponent->BindAxis("Rotate_Turret",this,&ATank::RotateTurret);
 }
 
-void ATank::RotateCW() 
+void ATank::RotateTurret(float Speed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("RotateCW Called"));
-	Turret->SetRelativeRotation(FRotator(0.0f,45.0f,0.0f));
+	if (!Turret) { return; }
+	Turret->AddRelativeRotation(FRotator(0.0f, Speed, 0.0f));
 }
-
-void ATank::RotateCCW()
-{
-	UE_LOG(LogTemp, Warning, TEXT("RotateCCW Called"));
-	Turret->SetRelativeRotation(FRotator(0.0f, -45.0f, 0.0f));
-}
-
 
 void ATank::SetTurretChildActor(UChildActorComponent * TurretFromBp)
 {
-	UE_LOG(LogTemp, Warning, TEXT("SetTurretChildActor Called"));
 	Turret = TurretFromBp;
 }
